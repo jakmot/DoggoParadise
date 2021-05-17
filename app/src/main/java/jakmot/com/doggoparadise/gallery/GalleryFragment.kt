@@ -1,4 +1,4 @@
-package jakmot.com.doggoparadise.ui.main
+package jakmot.com.doggoparadise.gallery
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -6,20 +6,19 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
 import jakmot.com.doggoparadise.R
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
-class MainFragment : Fragment() {
+class GalleryFragment : Fragment() {
 
-    private val viewModel: MainViewModel by viewModel()
+    private val viewModel: GalleryViewModel by viewModel()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        return inflater.inflate(R.layout.main_fragment, container, false)
+        return inflater.inflate(R.layout.gallery_fragment, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -31,6 +30,6 @@ class MainFragment : Fragment() {
     }
 
     companion object {
-        fun newInstance() = MainFragment()
+        fun newInstance() = GalleryFragment()
     }
 }

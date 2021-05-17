@@ -1,10 +1,10 @@
-package jakmot.com.doggoparadise.ui.main
+package jakmot.com.doggoparadise.gallery
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
-class MainViewModel : ViewModel() {
+class GalleryViewModel : ViewModel() {
 
     private val textToDisplay = MutableLiveData<String>().apply {
         value = "Doggo Paradise"
