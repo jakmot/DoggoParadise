@@ -26,8 +26,8 @@ class GalleryFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        viewModel.getTextToDisplay().observe(viewLifecycleOwner) {
-            requireBinding().message.text = it
+        viewModel.getDogsImages().observe(viewLifecycleOwner) { dogsImages ->
+            requireBinding().message.text = dogsImages.joinToString()
         }
         viewModel.init()
     }

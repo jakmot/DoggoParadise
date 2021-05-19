@@ -4,23 +4,22 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import jakmot.com.doggoparadise.api.DogCeoService
+import jakmot.com.doggoparadise.api.DogImage
+import jakmot.com.doggoparadise.api.DogImageRepository
 import kotlinx.coroutines.launch
 
 class GalleryViewModel(
-    private val dogCeoService: DogCeoService,
+    private val dogImageRepository: DogImageRepository,
 ) : ViewModel() {
 
-    private val textToDisplay = MutableLiveData<String>().apply {
-        value = "Doggo Paradise"
-    }
+    private val dogsImages = MutableLiveData<List<DogImage>>()
 
-    fun getTextToDisplay(): LiveData<String> = textToDisplay
+    fun getDogsImages(): LiveData<List<DogImage>> = dogsImages
 
     fun init() {
         viewModelScope.launch {
-            val response = dogCeoService.getRandomImage(50)
-            println(response)
+            val response = dogImageRepository.getRandomImages(50)
+            dogsImages.postValue(response)
         }
     }
 }
