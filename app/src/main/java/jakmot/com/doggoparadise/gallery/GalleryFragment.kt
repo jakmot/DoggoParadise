@@ -29,6 +29,7 @@ class GalleryFragment : Fragment() {
         viewModel.getTextToDisplay().observe(viewLifecycleOwner) {
             requireBinding().message.text = it
         }
+        viewModel.init()
     }
 
     private fun requireBinding(): GalleryFragmentBinding =

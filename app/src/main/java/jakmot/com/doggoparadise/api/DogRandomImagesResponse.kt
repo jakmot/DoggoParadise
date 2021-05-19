@@ -2,6 +2,6 @@ package jakmot.com.doggoparadise.api
 
 import com.squareup.moshi.Json
 
-class DogRandomImagesResponse(
+data class DogRandomImagesResponse(
     @Json(name = "message") val message: List<String>,
 )
