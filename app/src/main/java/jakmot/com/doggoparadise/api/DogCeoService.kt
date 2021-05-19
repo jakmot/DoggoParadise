@@ -1,22 +1,36 @@
 package jakmot.com.doggoparadise.api
 
+import jakmot.com.doggoparadise.BuildConfig
+import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
+import okhttp3.logging.HttpLoggingInterceptor.Level
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import retrofit2.http.GET
-import retrofit2.http.Query
+import retrofit2.http.Path
 
 interface DogCeoService {
 
     @GET("api/breeds/image/random/{count}")
     suspend fun getRandomImage(
-        @Query("count") count: Int,
+        @Path("count") count: Int,
     ): DogRandomImagesResponse
 
     companion object {
         private const val BASE_URL = "https://dog.ceo/"
 
         fun create(): DogCeoService {
+            val loggingInterceptor = HttpLoggingInterceptor(
+            ).apply {
+                level = if (BuildConfig.DEBUG) Level.BODY else Level.NONE
+            }
+
+            val okHttpClient = OkHttpClient.Builder()
+                .addInterceptor(loggingInterceptor)
+                .build()
+
             return Retrofit.Builder()
+                .client(okHttpClient)
                 .baseUrl(BASE_URL)
                 .addConverterFactory(MoshiConverterFactory.create())
                 .build()
