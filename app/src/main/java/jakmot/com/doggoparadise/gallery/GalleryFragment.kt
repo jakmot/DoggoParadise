@@ -4,9 +4,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.fragment.app.Fragment
-import jakmot.com.doggoparadise.R
+import jakmot.com.doggoparadise.databinding.GalleryFragmentBinding
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
@@ -14,19 +13,31 @@ class GalleryFragment : Fragment() {
 
     private val viewModel: GalleryViewModel by viewModel()
 
+    private var binding: GalleryFragmentBinding? = null
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        return inflater.inflate(R.layout.gallery_fragment, container, false)
+        return GalleryFragmentBinding.inflate(layoutInflater, container, false)
+            .also {
+                binding = it
+            }.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        val message = view.findViewById<TextView>(R.id.message)
-
         viewModel.getTextToDisplay().observe(viewLifecycleOwner) {
-            message.text = it
+            requireBinding().message.text = it
         }
+    }
+
+    private fun requireBinding(): GalleryFragmentBinding =
+        binding
+            ?: throw IllegalStateException("Accessing binding outside of Fragment lifecycle: GalleryFragment")
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        binding = null
     }
 
     companion object {
