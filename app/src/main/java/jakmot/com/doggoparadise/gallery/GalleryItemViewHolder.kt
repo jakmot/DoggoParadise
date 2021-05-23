@@ -2,8 +2,8 @@ package jakmot.com.doggoparadise.gallery
 
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import jakmot.com.doggoparadise.domain.Dog
 import jakmot.com.doggoparadise.databinding.GalleryItemBinding
+import jakmot.com.doggoparadise.domain.Dog
 
 class GalleryItemViewHolder(
     private val binding: GalleryItemBinding,
@@ -11,9 +11,13 @@ class GalleryItemViewHolder(
 ) : RecyclerView.ViewHolder(binding.root) {
 
     fun bind(dog: Dog) {
-        Glide.with(binding.root.context)
-            .load(dog.url)
-            .into(binding.image)
-        binding.container.setOnClickListener { onItemSelected(dog) }
+        with(binding) {
+            title.text = dog.name
+            subtitle.text = dog.shortDescription
+            Glide.with(root.context)
+                .load(dog.imageUrl)
+                .into(image)
+            container.setOnClickListener { onItemSelected(dog) }
+        }
     }
 }

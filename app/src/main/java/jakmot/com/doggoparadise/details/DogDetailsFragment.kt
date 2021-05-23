@@ -28,10 +28,13 @@ class DogDetailsFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        val binding = requireBinding()
-        Glide.with(this)
-            .load(args.dogImage.url)
-            .into(binding.image)
+        with(requireBinding()) {
+            Glide.with(this@DogDetailsFragment)
+                .load(args.dogData.imageUrl)
+                .into(image)
+            title.text = args.dogData.name
+            description.text = args.dogData.longDescription
+        }
     }
 
     private fun requireBinding(): DogDetailsFragmentBinding =

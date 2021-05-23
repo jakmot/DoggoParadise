@@ -4,17 +4,14 @@ import jakmot.com.doggoparadise.CoroutinesTestRule
 import jakmot.com.doggoparadise.FileUtils
 import jakmot.com.doggoparadise.InstantExecutorExtension
 import jakmot.com.doggoparadise.api.DogCeoService
-import jakmot.com.doggoparadise.domain.Dog
 import jakmot.com.doggoparadise.di.appModule
+import jakmot.com.doggoparadise.domain.Dog
 import jakmot.com.doggoparadise.getValue
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import okhttp3.mockwebserver.MockResponse
 import okhttp3.mockwebserver.MockWebServer
 import org.assertj.core.api.Assertions.assertThat
-import org.junit.jupiter.api.AfterAll
-import org.junit.jupiter.api.BeforeAll
-import org.junit.jupiter.api.Test
-import org.junit.jupiter.api.TestInstance
+import org.junit.jupiter.api.*
 import org.junit.jupiter.api.extension.ExtendWith
 import org.junit.jupiter.api.extension.RegisterExtension
 import org.koin.dsl.module
@@ -24,7 +21,6 @@ import org.koin.test.junit5.KoinTestExtension
 
 @ExperimentalCoroutinesApi
 @ExtendWith(CoroutinesTestRule::class, InstantExecutorExtension::class)
-@TestInstance(TestInstance.Lifecycle.PER_CLASS)
 class GalleryViewModelTest : KoinTest {
 
     private val server: MockWebServer = MockWebServer()
@@ -43,12 +39,12 @@ class GalleryViewModelTest : KoinTest {
             })
     }
 
-    @BeforeAll
+    @BeforeEach
     fun beforeAll() {
         server.start()
     }
 
-    @AfterAll
+    @AfterEach
     fun afterAll() {
         server.close()
     }
@@ -56,7 +52,10 @@ class GalleryViewModelTest : KoinTest {
     @Test
     fun should_emit_data_when_api_call_was_successful() {
         val expectedFirstElement = Dog(
-            url = "https://images.dog.ceo/breeds/rottweiler/n02106550_10375.jpg"
+            imageUrl = "https://images.dog.ceo/breeds/rottweiler/n02106550_10375.jpg",
+            name = "Pug 0",
+            shortDescription = "really cute pug",
+            longDescription = "The pug is a breed of dog with physically distinctive features of a wrinkly, short-muzzled face, and curled tail. The breed has a fine, glossy coat that comes in a variety of colours, most often light brown (fawn) or black, and a compact, square body with well-developed muscles.",
         )
         server.enqueue(
             MockResponse()

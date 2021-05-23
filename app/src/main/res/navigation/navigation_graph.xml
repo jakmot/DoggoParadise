@@ -16,7 +16,7 @@
         android:name="jakmot.com.doggoparadise.details.DogDetailsFragment"
         android:label="DogDetailsFragment" >
         <argument
-            android:name="dogImage"
-            app:argType="jakmot.com.doggoparadise.api.DogImage" />
+            android:name="dogData"
+            app:argType="jakmot.com.doggoparadise.domain.Dog" />
     </fragment>
 </navigation>
