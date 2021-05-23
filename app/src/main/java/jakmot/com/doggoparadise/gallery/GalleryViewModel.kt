@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import jakmot.com.doggoparadise.api.DogImage
+import jakmot.com.doggoparadise.domain.Dog
 import jakmot.com.doggoparadise.api.DogImageRepository
 import jakmot.com.doggoparadise.common.Event
 import jakmot.com.doggoparadise.error.ErrorHandler
@@ -17,11 +17,11 @@ class GalleryViewModel(
     private val errorHandler: ErrorHandler,
 ) : ViewModel() {
 
-    private val dogsImages = MutableLiveData<List<DogImage>>()
+    private val dogsImages = MutableLiveData<List<Dog>>()
 
     private val showError = MutableLiveData<Event<Boolean>>()
 
-    fun getDogsImages(): LiveData<List<DogImage>> = dogsImages
+    fun getDogsImages(): LiveData<List<Dog>> = dogsImages
 
     fun shouldShowError(): LiveData<Event<Boolean>> = showError
 

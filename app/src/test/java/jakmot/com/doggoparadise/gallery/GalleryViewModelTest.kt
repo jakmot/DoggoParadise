@@ -4,7 +4,7 @@ import jakmot.com.doggoparadise.CoroutinesTestRule
 import jakmot.com.doggoparadise.FileUtils
 import jakmot.com.doggoparadise.InstantExecutorExtension
 import jakmot.com.doggoparadise.api.DogCeoService
-import jakmot.com.doggoparadise.api.DogImage
+import jakmot.com.doggoparadise.domain.Dog
 import jakmot.com.doggoparadise.di.appModule
 import jakmot.com.doggoparadise.getValue
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -55,7 +55,7 @@ class GalleryViewModelTest : KoinTest {
 
     @Test
     fun should_emit_data_when_api_call_was_successful() {
-        val expectedFirstElement = DogImage(
+        val expectedFirstElement = Dog(
             url = "https://images.dog.ceo/breeds/rottweiler/n02106550_10375.jpg"
         )
         server.enqueue(

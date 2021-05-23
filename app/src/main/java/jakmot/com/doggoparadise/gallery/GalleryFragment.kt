@@ -9,7 +9,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.google.android.material.snackbar.Snackbar
 import jakmot.com.doggoparadise.R
-import jakmot.com.doggoparadise.api.DogImage
+import jakmot.com.doggoparadise.domain.Dog
 import jakmot.com.doggoparadise.common.observeEvent
 import jakmot.com.doggoparadise.databinding.GalleryFragmentBinding
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -54,9 +54,9 @@ class GalleryFragment : Fragment() {
         viewModel.init()
     }
 
-    private fun navigateToDogDetails(dogImage: DogImage) {
+    private fun navigateToDogDetails(dog: Dog) {
         val action =
-            GalleryFragmentDirections.actionGalleryFragmentToDogDetailsFragment(dogImage)
+            GalleryFragmentDirections.actionGalleryFragmentToDogDetailsFragment(dog)
         findNavController().navigate(action)
     }
 
