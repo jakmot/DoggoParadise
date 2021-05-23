@@ -69,4 +69,17 @@ class GalleryViewModelTest : KoinTest {
         assertThat(actualValue.first()).isEqualTo(expectedFirstElement)
     }
 
+    @Test
+    fun should_show_error_when_api_call_failed() {
+        server.enqueue(
+            MockResponse()
+                .setResponseCode(401)
+        )
+
+        galleryViewModel.init()
+        val actualValue = getValue(galleryViewModel.shouldShowError())
+
+        assertThat(actualValue.content).isTrue()
+    }
+
 }

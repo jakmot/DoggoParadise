@@ -5,12 +5,12 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.TestCoroutineDispatcher
 import kotlinx.coroutines.test.resetMain
 import kotlinx.coroutines.test.setMain
-import org.junit.jupiter.api.extension.AfterEachCallback
+import org.junit.jupiter.api.extension.AfterAllCallback
 import org.junit.jupiter.api.extension.BeforeAllCallback
 import org.junit.jupiter.api.extension.ExtensionContext
 
 @ExperimentalCoroutinesApi
-class CoroutinesTestRule() : BeforeAllCallback, AfterEachCallback {
+class CoroutinesTestRule() : BeforeAllCallback, AfterAllCallback {
 
     private val testDispatcher: TestCoroutineDispatcher = TestCoroutineDispatcher()
 
@@ -18,7 +18,7 @@ class CoroutinesTestRule() : BeforeAllCallback, AfterEachCallback {
         Dispatchers.setMain(testDispatcher)
     }
 
-    override fun afterEach(context: ExtensionContext?) {
+    override fun afterAll(context: ExtensionContext?) {
         Dispatchers.resetMain()
         testDispatcher.cleanupTestCoroutines()
     }
