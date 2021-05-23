@@ -1,3 +1,5 @@
 package jakmot.com.doggoparadise.api
 
-data class DogImage(val url: String)
+import java.io.Serializable
+
+data class DogImage(val url: String): Serializable
