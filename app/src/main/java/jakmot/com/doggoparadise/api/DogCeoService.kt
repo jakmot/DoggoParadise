@@ -17,9 +17,9 @@ interface DogCeoService {
     ): DogRandomImagesResponse
 
     companion object {
-        private const val BASE_URL = "https://dog.ceo/"
+        const val BASE_URL = "https://dog.ceo/"
 
-        fun create(): DogCeoService {
+        fun create(baseUrl: String): DogCeoService {
             val loggingInterceptor = HttpLoggingInterceptor(
             ).apply {
                 level = if (BuildConfig.DEBUG) Level.BODY else Level.NONE
@@ -31,7 +31,7 @@ interface DogCeoService {
 
             return Retrofit.Builder()
                 .client(okHttpClient)
-                .baseUrl(BASE_URL)
+                .baseUrl(baseUrl)
                 .addConverterFactory(MoshiConverterFactory.create())
                 .build()
                 .create(DogCeoService::class.java)

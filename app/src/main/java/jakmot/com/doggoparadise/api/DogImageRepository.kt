@@ -5,6 +5,8 @@ class DogImageRepository(
 ) {
 
     suspend fun getRandomImages(count: Int): List<DogImage> {
-        return dogCeoService.getRandomImage(count).message.map(::DogImage)
+        return dogCeoService.getRandomImage(count)
+            .message
+            .map(::DogImage)
     }
 }

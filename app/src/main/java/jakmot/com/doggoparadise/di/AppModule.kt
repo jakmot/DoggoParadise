@@ -8,6 +8,6 @@ import org.koin.dsl.module
 
 fun appModule() = module {
     viewModel { GalleryViewModel(get()) }
-    single { DogCeoService.create() }
+    single { DogCeoService.create(DogCeoService.BASE_URL) }
     single { DogImageRepository(get()) }
 }
