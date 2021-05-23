@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto" android:id="@+id/navigation_grph"
+    app:startDestination="@id/galleryFragment">
+
+    <fragment
+        android:id="@+id/galleryFragment"
+        android:name="jakmot.com.doggoparadise.gallery.GalleryFragment"
+        android:label="GalleryFragment" >
+        <action
+            android:id="@+id/action_galleryFragment_to_dogDetailsFragment"
+            app:destination="@id/dogDetailsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/dogDetailsFragment"
+        android:name="jakmot.com.doggoparadise.details.DogDetailsFragment"
+        android:label="DogDetailsFragment" >
+        <argument
+            android:name="dogImage"
+            app:argType="jakmot.com.doggoparadise.api.DogImage" />
+    </fragment>
+</navigation>

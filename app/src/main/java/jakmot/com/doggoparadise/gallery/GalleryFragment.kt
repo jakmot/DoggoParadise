@@ -5,15 +5,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.commit
-import androidx.fragment.app.replace
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.google.android.material.snackbar.Snackbar
 import jakmot.com.doggoparadise.R
+import jakmot.com.doggoparadise.api.DogImage
 import jakmot.com.doggoparadise.common.observeEvent
 import jakmot.com.doggoparadise.databinding.GalleryFragmentBinding
-import jakmot.com.doggoparadise.details.DogDetailsFragment
-import jakmot.com.doggoparadise.details.DogDetailsFragment.Companion.createBundle
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class GalleryFragment : Fragment() {
@@ -34,13 +32,7 @@ class GalleryFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         val binding = requireBinding()
 
-        val galleryAdapter = GalleryAdapter { dogImage ->
-            parentFragmentManager.commit {
-                replace<DogDetailsFragment>(R.id.container, DogDetailsFragment::class.java.name, createBundle(dogImage))
-                setReorderingAllowed(true)
-                addToBackStack(null)
-            }
-        }
+        val galleryAdapter = GalleryAdapter(::navigateToDogDetails)
         binding.recyclerView.apply {
             adapter = galleryAdapter
             layoutManager = GridLayoutManager(this@GalleryFragment.requireContext(), 2)
@@ -60,6 +52,12 @@ class GalleryFragment : Fragment() {
             }
         }
         viewModel.init()
+    }
+
+    private fun navigateToDogDetails(dogImage: DogImage) {
+        val action =
+            GalleryFragmentDirections.actionGalleryFragmentToDogDetailsFragment(dogImage)
+        findNavController().navigate(action)
     }
 
     private fun requireBinding(): GalleryFragmentBinding =

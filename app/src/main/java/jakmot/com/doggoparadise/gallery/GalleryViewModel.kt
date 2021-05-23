@@ -26,6 +26,10 @@ class GalleryViewModel(
     fun shouldShowError(): LiveData<Event<Boolean>> = showError
 
     fun init() {
+        if (dogsImages.value != null) {
+            return
+        }
+
         viewModelScope.launch {
             try {
                 val response = withContext(Dispatchers.Default) {
