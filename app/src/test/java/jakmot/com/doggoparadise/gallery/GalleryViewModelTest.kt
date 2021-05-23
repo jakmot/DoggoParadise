@@ -4,11 +4,13 @@ import jakmot.com.doggoparadise.CoroutinesTestRule
 import jakmot.com.doggoparadise.FileUtils
 import jakmot.com.doggoparadise.InstantExecutorExtension
 import jakmot.com.doggoparadise.api.DogCeoService
+import jakmot.com.doggoparadise.api.DogImage
 import jakmot.com.doggoparadise.di.appModule
 import jakmot.com.doggoparadise.getValue
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import okhttp3.mockwebserver.MockResponse
 import okhttp3.mockwebserver.MockWebServer
+import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.AfterAll
 import org.junit.jupiter.api.BeforeAll
 import org.junit.jupiter.api.Test
@@ -53,12 +55,18 @@ class GalleryViewModelTest : KoinTest {
 
     @Test
     fun should_emit_data_when_api_call_was_successful() {
+        val expectedFirstElement = DogImage(
+            url = "https://images.dog.ceo/breeds/rottweiler/n02106550_10375.jpg"
+        )
         server.enqueue(
             MockResponse()
                 .setBody(fileUtils.loadFile("sample_response.json"))
         )
+
         galleryViewModel.init()
-        getValue(galleryViewModel.getDogsImages())
+        val actualValue = getValue(galleryViewModel.getDogsImages())
+
+        assertThat(actualValue.first()).isEqualTo(expectedFirstElement)
     }
 
 }
