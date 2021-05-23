@@ -1,6 +1,9 @@
 # PhotoBooth
 Application that shows photos of dogs. To get dogs' photos, [Dog Ceo Api](https://dog.ceo/dog-api/) was used
-https://user-images.githubusercontent.com/31387943/119273197-0dabf480-bc0a-11eb-84b3-c9fec1fdeb63.mov
+
+https://user-images.githubusercontent.com/31387943/119273226-30d6a400-bc0a-11eb-8990-e35b7ed79cd4.mov
+
+
 
 [Trello board](https://trello.com/b/PkKfwODq)
 
