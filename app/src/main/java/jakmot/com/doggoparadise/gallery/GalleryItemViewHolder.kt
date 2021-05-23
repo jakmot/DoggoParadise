@@ -7,12 +7,13 @@ import jakmot.com.doggoparadise.databinding.GalleryItemBinding
 
 class GalleryItemViewHolder(
     private val binding: GalleryItemBinding,
-    private val onItemSelected: () -> Unit,
+    private val onItemSelected: (DogImage) -> Unit,
 ) : RecyclerView.ViewHolder(binding.root) {
 
     fun bind(dogImage: DogImage) {
         Glide.with(binding.root.context)
             .load(dogImage.url)
             .into(binding.image)
+        binding.container.setOnClickListener { onItemSelected(dogImage) }
     }
 }

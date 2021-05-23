@@ -45,10 +45,8 @@ class DogDetailsFragment : Fragment() {
 
     companion object {
         private const val DOG_DATA = "DOG_DATA"
-        fun newInstance(dogImage: DogImage): DogDetailsFragment = DogDetailsFragment().apply {
-            arguments = bundleOf(
-                DOG_DATA to dogImage
-            )
-        }
+        fun createBundle(dogImage: DogImage): Bundle = bundleOf(
+            DOG_DATA to dogImage
+        )
     }
 }

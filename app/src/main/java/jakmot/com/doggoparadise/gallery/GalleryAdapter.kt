@@ -7,7 +7,7 @@ import jakmot.com.doggoparadise.common.layoutInflater
 import jakmot.com.doggoparadise.databinding.GalleryItemBinding
 
 class GalleryAdapter(
-    private val onDogSelected: () -> Unit,
+    private val onDogSelected: (DogImage) -> Unit,
 ) : RecyclerView.Adapter<GalleryItemViewHolder>() {
 
     var dogList: List<DogImage> = emptyList()
