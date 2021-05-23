@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Doggo Paradise</string>
+    <string name="error_message">Something went wrong. Please check you connection internet connection and restart the app</string>
 </resources>

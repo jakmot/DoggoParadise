@@ -5,6 +5,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import com.google.android.material.snackbar.Snackbar
+import jakmot.com.doggoparadise.R
+import jakmot.com.doggoparadise.common.observeEvent
 import jakmot.com.doggoparadise.databinding.GalleryFragmentBinding
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -28,6 +31,15 @@ class GalleryFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         viewModel.getDogsImages().observe(viewLifecycleOwner) { dogsImages ->
             requireBinding().message.text = dogsImages.joinToString()
+        }
+        viewModel.shouldShowError().observeEvent(viewLifecycleOwner) { shouldShowError ->
+            if (shouldShowError) {
+                Snackbar.make(
+                    requireBinding().root,
+                    getString(R.string.error_message),
+                    Snackbar.LENGTH_SHORT
+                ).show()
+            }
         }
         viewModel.init()
     }
