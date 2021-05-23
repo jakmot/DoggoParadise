@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.GridLayoutManager
 import com.google.android.material.snackbar.Snackbar
 import jakmot.com.doggoparadise.R
 import jakmot.com.doggoparadise.common.observeEvent
@@ -29,8 +30,16 @@ class GalleryFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        val binding = requireBinding()
+        val galleryAdapter = GalleryAdapter({})
+        binding.recyclerView.apply {
+            adapter = galleryAdapter
+            layoutManager = GridLayoutManager(this@GalleryFragment.requireContext(),2)
+
+        }
         viewModel.getDogsImages().observe(viewLifecycleOwner) { dogsImages ->
-            requireBinding().message.text = dogsImages.joinToString()
+            galleryAdapter.dogList = dogsImages
+            galleryAdapter.notifyDataSetChanged()
         }
         viewModel.shouldShowError().observeEvent(viewLifecycleOwner) { shouldShowError ->
             if (shouldShowError) {
